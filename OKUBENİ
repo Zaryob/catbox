@@ -76,8 +76,8 @@ import catbox
 def func():
     file("/tmp/catboxtest", "w").write("test")
 
-print "/tmp izinli"
+print ("/tmp izinli")
 catbox.run(func, ["/tmp"])
-print "/tmp izinsiz"
+print ("/tmp izinsiz")
 catbox.run(func, [])
 
