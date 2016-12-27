@@ -9,7 +9,7 @@ def tryWrite(path):
         f = file(path, "w")
         f.write("hello world\n")
         f.close()
-    except Exception, e:
+    except Exception as e:
         pass
 
 def timeWrite(path):
@@ -20,14 +20,14 @@ def timeWrite(path):
     return end - start
 
 def goodCase():
-    print "Sandbox with allowed path:   %f" % timeWrite("catboxtest.txt")
+    print("Sandbox with allowed path:   %f" % timeWrite("catboxtest.txt"))
 
 def badCase():
-    print "Sandbox with forbidden path: %f" % timeWrite("/tmp/catboxtest.txt")
+    print("Sandbox with forbidden path: %f" % timeWrite("/tmp/catboxtest.txt"))
 
 def test():
     allowed = [os.getcwd()]
-    print "Normal open/write time:      %f" % timeWrite("catboxtest.txt")
+    print("Normal open/write time:      %f" % timeWrite("catboxtest.txt"))
     catbox.run(goodCase, allowed)
     catbox.run(badCase, allowed)
 

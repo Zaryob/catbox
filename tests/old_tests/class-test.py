@@ -10,7 +10,7 @@ class Test:
     def write(self):
         try:
             file(self.path, "w").write("lala\n")
-        except IOError, e:
+        except IOError as e:
             if e.errno == 13:
                 sys.exit(0)
         sys.exit(2)
@@ -18,7 +18,7 @@ class Test:
     def boxedWrite(self):
         ret = catbox.run(self.write)
         if ret.code:
-            print "Sandbox error"
+            print("Sandbox error")
             sys.exit(2)
 
 test = Test("catboxtest.deleteme")

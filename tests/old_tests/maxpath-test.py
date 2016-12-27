@@ -15,13 +15,13 @@ def testMaxPath():
                 os.rmdir(name)
             os.mkdir(name)
             os.rmdir(name)
-        except OSError, e:
+        except OSError as e:
             if e.errno == 36:
                 if normal_count != None and count != normal_count:
-                    print "Expected count %d, calculated %d" % (normal_count, count)
+                    print("Expected count %d, calculated %d" % (normal_count, count))
                     sys.exit(1)
                 return count
-            print e
+            print(e)
             raise
         count += 1
 

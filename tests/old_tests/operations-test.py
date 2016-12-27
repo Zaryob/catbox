@@ -8,11 +8,11 @@ import stat
 def tryOp(name, op, path):
     try:
         op(path)
-        print "Sandbox violation: %s '%s'" % (name, path)
-    except IOError, e:
+        print("Sandbox violation: %s '%s'" % (name, path))
+    except IOError as e:
         if e.errno == 13:
             return 0
-    except OSError, e:
+    except OSError as e:
         if e.errno == 13:
             return 0
     return 1

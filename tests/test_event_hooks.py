@@ -1,7 +1,7 @@
 import os
 import time
 
-import testing
+from . import testing
 import testify as T
 
 import catbox
@@ -27,7 +27,7 @@ class EventHooksTestCase(testing.BaseTestCase):
 
     def test_failing_child_initialized_hook(self):
         def child_initialized_hook(child_pid):
-            raise Exception, "child_initialized hook raises exception"
+            raise Exception("child_initialized hook raises exception")
 
         # When child_initialized hook fails parent process will
         # exit. To test a failing initilization hook we fork and watch
@@ -48,7 +48,7 @@ class EventHooksTestCase(testing.BaseTestCase):
                     if wait_pid == pid:
                         break
                     time.sleep(.1)
-            except OSError, e:
+            except OSError as e:
                 T.assert_in("No child processes", e)
             else:
                 T.assert_not_equal(

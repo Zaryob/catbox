@@ -20,4 +20,4 @@ assert(ret.violations == [])
 
 ret = catbox.run(test, network=False)
 assert(ret.code == 1)
-assert(map(lambda x: x[0], ret.violations) == ["socketcall"])
+assert([x[0] for x in ret.violations] == ["socketcall"])

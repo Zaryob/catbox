@@ -8,7 +8,7 @@ import threading
 def test():
     try:
         file("lala", "w").write("hello world\n")
-    except IOError, e:
+    except IOError as e:
         if e.errno != 13:
             raise
 
@@ -25,4 +25,4 @@ def main():
 ret = catbox.run(main)
 assert(ret.code == 0)
 canonical = os.path.realpath(os.getcwd() + "/lala")
-assert(len(filter(lambda x: x == ("open", "lala", canonical), ret.violations)) == 4)
+assert(len([x for x in ret.violations if x == ("open", "lala", canonical)]) == 4)

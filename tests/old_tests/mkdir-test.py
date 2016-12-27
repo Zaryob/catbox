@@ -15,7 +15,7 @@ import catbox
 def test():
     try:
         os.mkdir("/var")
-    except OSError, e:
+    except OSError as e:
         if e.errno == 17:
             # We want this error code, even though we dont have write access
             sys.exit(0)

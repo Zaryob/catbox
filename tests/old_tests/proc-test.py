@@ -10,8 +10,8 @@ def test():
     os.chdir(cur)
     try:
         file("/proc/self/cwd/catboxtest.deleteme", "w").write("Hello world\n")
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
 
 def parent():
     os.chdir("/var")

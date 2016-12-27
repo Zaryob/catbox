@@ -10,7 +10,7 @@ def test():
     file(dir_name + "/lala", "w").write("hello world\n")
     try:
         os.mkdir(dir_name + "lala")
-    except Exception, e:
+    except Exception as e:
         if e.errno != 13:
             raise
 

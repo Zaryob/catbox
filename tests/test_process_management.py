@@ -4,7 +4,7 @@ import sys
 import subprocess
 import time
 
-import testing
+from . import testing
 import testify as T
 
 class ProcessManagementTestCase(testing.BaseTestCase):

@@ -9,13 +9,13 @@ def tryWrite(who, path="/tmp/catboxtest.txt"):
         f = file(path, "w")
         f.write("hello world\n")
         f.close()
-    except IOError, e:
+    except IOError as e:
         if e.errno == 13:
             return 0
-        print "Sandbox error in %s: cannot write '%s': %s" % (who, path, e)
+        print("Sandbox error in %s: cannot write '%s': %s" % (who, path, e))
         return 1
     
-    print "Sandbox violation in %s: wrote '%s'" % (who, path)
+    print("Sandbox violation in %s: wrote '%s'" % (who, path))
     return 1
 
 def testNode(level):
@@ -23,7 +23,7 @@ def testNode(level):
     if level < 3:
         pid = os.fork()
         if pid == -1:
-            print "fork failed"
+            print("fork failed")
             sys.exit(0)
 
     if pid == 0:
