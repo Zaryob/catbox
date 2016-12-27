@@ -1,0 +1,20 @@
+python-catbox (1.6.1-yelp1) lucid; urgency=low
+
+  * Bump version for setup.py fixes 
+
+ -- Baris Metin <bmetin@yelp.com>  Wed, 29 Jan 2014 13:23:10 -0800
+
+python-catbox (1.6-yelp1) lucid; urgency=low
+
+  * Bump package for new catbox release
+
+ -- Baris Metin <bmetin@yelp.com>  Wed, 20 Feb 2013 17:12:29 -0800
+
+python-catbox (1.5-yelp1) unstable; urgency=low
+
+  * Initial Packaging
+
+ -- Keith Mosher <kmosher@yelp.com>  Mon, 17 Dec 2012 20:08:45 -0800
+
+
+

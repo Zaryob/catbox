@@ -1,0 +1,13 @@
+* return callable's return value via some magic
+
+  This is already works for normal run but doesn't work for
+  collect_only mode. Instead of faking a syscall (0xbadca11) we need
+  to find a better way to communicate with the parent. (abstract
+  domain sockets?)
+
+* check that dir exists for mkdir EEXIST case, write complete test
+* implement action=log/deny/stop argument, write a test case
+* reactivate chown/chmod log code
+* allow optional logging of read accesses
+* need ability to whitelist at least reading of some files
+* anything else? :)

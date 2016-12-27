@@ -1,0 +1,83 @@
+
+Pisi ve sandboxing
+------------------
+
+Sandbox, basitçe, programları kontrollü bir ortam altında çalıştıran
+ve dosya, bellek, ağ gibi kaynaklara erişimini izleyen ve denetleyen
+bir uygulama türüdür.
+
+Pisi için bu tür ihtiyaçlarımız:
+
+1. Paketlerin inşa edilirken /var/tmp/pisi/paketadı-sürüm/install dizini
+dışında dosya oluşturmalarını istemiyoruz. Bu tür olaylar, paketin
+actions.py dosyası hazırlanırken yapılan yanlışlıklardan kaynaklanıyor ve
+önem dereceleri kritik. En öncelikli ihtiyacımız bu tip sorunları yakalamak.
+
+2. Dosya izinleriyle ilgili chown, chmod gibi işlemleri gerçekten uygulamak
+yerine bir kenara kaydedip oluşturulan paket içinde not ederek, paket inşa
+sürecini root kullanıcı olarak yapmak zorunluluğundan kurtulabiliyoruz.
+
+3. Genel kaynak kullanımının incelenebilmesi ile faydalı bilgiler elde
+edilebilir. Mesela okuma erişimi için açılan dosyaların listesinden
+gidilerek paket bağımlılıklarının eksik olup olmadığına bakılabilir.
+Çok önemli değil bu özellik.
+
+4. Yazma işlemlerinde /var/tmp/pisi/paketadı-sürüm/ dizinini / dizini
+gibi gösterip, inşa betikleri bir parça basitleştirilebilir. Göründüğü
+kadar basit olmayan bir işlem bu, linkler, mount noktaları, bir sürü
+ayrıntıyı atlamamak lazım. Şu anda çok bir fayda sağlamayacağı için
+önem derecesi en düşük özellik bu.
+
+Kullanıcı düzeyinde bu tür bir kontrol yapabilmek için özel çekirdek
+modülleri yazmadan kullanılabilecek iki yol var:
+
+1. LD_PRELOAD: glibc fonksiyonlarının üzerine çıkan fonksiyonlardan oluşan
+bir kitaplık yazıp, bunu LD_PRELOAD çevre değişkenine atıyoruz, sonra
+kontrol edilecek programı çalıştırınca bu fonksiyonlar araya girip işlemleri
+denetlememizi sağlıyor. Pisi içinden inşa betiklerini direk çalıştırdığımız
+ve bir sürü değeri Python veri tipleri ile aktardığımız için kolayca
+kullanabileceğimiz bir yol değil. Gentoo sandbox ve Debian fakeroot
+tarafından kullanılan bir yöntem.
+
+2. ptrace: gdb gibi hata arayıcıların kullandığı bu çekirdek özelliği ile
+takip edilen program bir sistem çağrısı yaptığında kontrol programı devreye
+girip istediği inceleme ve değişiklikleri yapabiliyor. Bu yolu kullanan ve
+Python ile yazılmış modüller aracılığıyla programları denetleyebilen
+Subterfugue adında bir program mevcut. Ufak bir C modülü dışında tamamen
+Python ile yazıldığından oldukça yavaş. Özellikle büyük paketlerin
+derlenmesini çok yavaşlatacağından direk kullanıma uygun değil.
+
+*************************  ÖNEMLİ NOT ****************************
+Her iki yöntemde de sandbox dışına çıkmak için bir çok yol mevcut.
+Burada amaç kötü niyetli saldırıları önlemek değil, paketçi hatası
+kaynaklı sorunları bulmak. Paket inşa sandboxlarının hiçbirini
+güvenlik amaçlı kullanmayınız!
+******************************************************************
+
+
+
+catbox içyapısı
+---------------
+
+catbox, ptrace metodu ile sistem çağrılarını denetleyebilen bir Python
+modülü. Herhangi bir Python fonksiyonunu verilen kurallar altında
+çalıştırabildiği için Pisi'ye entegre edilmesi çok kolay. Derlenmiş
+olduğu ve genel bir denetleme yerine sadece Pisi'nin ihtiyaçlarını
+yerine getirdiği için de oldukça hızlı.
+
+
+
+
+catbox kullanımı
+----------------
+
+import catbox
+
+def func():
+    file("/tmp/catboxtest", "w").write("test")
+
+print "/tmp izinli"
+catbox.run(func, ["/tmp"])
+print "/tmp izinsiz"
+catbox.run(func, [])
+

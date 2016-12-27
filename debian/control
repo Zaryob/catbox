@@ -1,0 +1,17 @@
+Source: python-catbox
+Section: python
+Priority: optional
+Maintainer: Baris Metin <bmetin@yelp.com>
+Build-Depends: debhelper (>= 6.0.4), python-support, cdbs, libpcre3-dev
+XS-Python-Version: >=2.6
+Standards-Version: 3.7.2
+Homepage: http://github.com/Yelp/catbox
+
+Package: python-catbox
+Architecture: any
+Depends: ${misc:Depends}, ${python:Depends}
+XB-Python-Version: ${python:Versions}
+Description: Fast sandboxing module for Python
+    Catbox is a sandboxing/tracing module for python. It uses ptrace
+    to trace the child process and disallows or collects violating
+    syscalls.
