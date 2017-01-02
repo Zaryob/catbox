@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import optparse
 import subprocess
@@ -53,7 +53,7 @@ def main():
 
     opts, args = parser.parse_args()
     if opts.version:
-        print catbox.version()
+        print (catbox.version())
 
     exit_val = 0
     for cmd in args:
