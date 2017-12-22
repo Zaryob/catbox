@@ -23,8 +23,7 @@ static PyMemberDef members[] = {
 };
 
 static PyTypeObject RetVal_type = {
-	PyObject_HEAD_INIT(NULL)
-	0,			/* ob_size */
+	PyVarObject_HEAD_INIT(NULL, 0)
 	"catbox.RetVal",	/* tp_name */
 	sizeof(RetVal),		/* tp_basicsize */
 	0,			/* tp_itemsize */
