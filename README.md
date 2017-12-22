@@ -1,5 +1,5 @@
 # CATBOX
-[![Linux Build Status](https://api.travis-ci.org/Zaryob/catbox.svg?branch=master)][travis]
+[![Build Status](https://travis-ci.org/Zaryob/catbox.svg?branch=master)](https://travis-ci.org/Zaryob/catbox)
 
 a sandbox compilation environment for package manager
 
