@@ -1,4 +1,6 @@
-# catbox
+# CATBOX
+[![Linux Build Status](https://api.travis-ci.org/Zaryob/catbox.svg?branch=master)][travis]
+
 a sandbox compilation environment for package manager
 
 Sandbox is a mechanism which provides a tighly-controlled set of resources
